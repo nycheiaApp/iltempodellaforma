@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adriano Segarelli — Sculture in argilla</title>
+<meta name="description" content="Sculture in argilla di Adriano Segarelli.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none'%3E%3Cpath d='M6 30 L20 6 L34 30 Z' stroke='%23c0472a' stroke-width='2'/%3E%3Cpath d='M13 24 L27 24' stroke='%238b4226' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Cormorant Garamond";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/cormorant-garamond-400.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-weight:400;font-style:italic;font-display:swap;src:url(fonts/cormorant-garamond-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Jost";font-weight:300;font-style:normal;font-display:swap;src:url(fonts/jost-300.woff2) format("woff2")}
+@font-face{font-family:"Jost";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/jost-400.woff2) format("woff2")}
+:root{--bg:#f5efe6;--bg2:#ebe2d3;--ink:#3a2f27;--mute:#7d6e60;--clay:#b5714d;--line:#d8cbb8;
+--serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:300 1.05rem/1.7 var(--sans)}
+a{color:inherit}
+header{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:1.2rem clamp(1.2rem,4vw,3rem);z-index:5;background:linear-gradient(var(--bg),transparent);}
+header a{text-decoration:none;font:400 .78rem var(--sans);letter-spacing:.2em;text-transform:uppercase}
+header .n{font:400 1.4rem var(--serif);letter-spacing:.02em;text-transform:none}
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:6rem clamp(1.2rem,4vw,3rem) 3rem}
+.hero figure{background:var(--bg2) center/cover;min-height:55vh;border-radius:2px;display:grid;place-items:center;color:var(--mute);font-style:italic;font-family:var(--serif)}
+.hero h1{font:400 clamp(2.4rem,7vw,5.5rem)/1.05 var(--serif);margin-top:1.8rem}
+.hero h1 em{color:var(--clay)}
+.hero p{color:var(--mute);letter-spacing:.2em;text-transform:uppercase;font-size:.78rem;margin-top:.8rem}
+section{padding:clamp(4rem,10vw,8rem) clamp(1.2rem,4vw,3rem)}
+.about{max-width:42rem;margin:auto;text-align:center}
+.about p{font:400 clamp(1.35rem,2.6vw,1.8rem)/1.5 var(--serif)}
+.gallery{columns:3 280px;column-gap:1.4rem;max-width:80rem;margin:auto}
+.work{break-inside:avoid;margin-bottom:1.4rem;cursor:zoom-in;opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s}
+.work.in{opacity:1;transform:none}
+.work .ph{background:var(--bg2);width:100%;display:block;color:var(--mute);display:grid;place-items:center;font:italic 1.1rem var(--serif)}
+.work img{width:100%;display:block}
+.work h3{font:400 1.2rem var(--serif);margin-top:.6rem}
+.work span{color:var(--mute);font-size:.85rem}
+.contact{background:var(--bg2)}
+.cwrap{max-width:62rem;margin:auto;display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(2rem,6vw,5rem)}
+.contact h2{font:400 clamp(2rem,4vw,3rem)/1.1 var(--serif);margin-bottom:1.5rem}
+.contact dl{display:grid;gap:1rem}
+.contact dt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
+.contact dd{margin:0}
+form{display:grid;gap:1.2rem}
+label{display:grid;gap:.3rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+input,select,textarea{font:300 1rem var(--sans);color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);padding:.6rem 0;border-radius:0;outline:0;letter-spacing:0;text-transform:none}
+input:focus,select:focus,textarea:focus{border-color:var(--clay)}
+textarea{min-height:7rem;resize:vertical}
+button{justify-self:start;font:400 .8rem var(--sans);letter-spacing:.2em;text-transform:uppercase;background:var(--ink);color:var(--bg);border:0;padding:1rem 2rem;cursor:pointer;transition:background .3s}
+button:hover{background:var(--clay)}
+#ok{display:none;color:var(--clay)}
+footer{border-top:1px solid var(--line);padding:clamp(3rem,6vw,5rem) clamp(1.2rem,4vw,3rem) 1.5rem;font-size:.92rem;color:var(--mute)}
+.fg{max-width:80rem;margin:auto;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2.5rem}
+footer .fn{font:400 1.6rem var(--serif);color:var(--ink);margin-bottom:.6rem}
+footer p{max-width:26rem;line-height:1.6}
+footer h4{font:400 .72rem var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:.9rem}
+footer ul{list-style:none;padding:0;display:grid;gap:.45rem}
+footer a{text-decoration:none;color:inherit}footer a:hover{color:var(--clay)}
+.fb{max-width:80rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem 1rem;font-size:.8rem}
+@media(max-width:760px){.fg{grid-template-columns:1fr;gap:2rem}}
+.lb{position:fixed;inset:0;background:rgba(245,239,230,.97);display:none;z-index:10;grid-template-rows:1fr auto;padding:1.2rem;align-items:center;justify-items:center}
+.lb.on{display:grid}
+.lb .stage{max-width:100%;max-height:100%;display:grid;place-items:center;min-height:0;height:100%;width:100%}
+.lb img{max-width:100%;max-height:100%;object-fit:contain}
+.lb .ph{width:min(70vw,30rem);aspect-ratio:4/5;background:var(--bg2);display:grid;place-items:center;font:italic 1.2rem var(--serif);color:var(--mute)}
+.lb p{text-align:center;padding-top:1rem}
+.lb p b{font:400 1.4rem var(--serif);display:block}
+.lb button{position:absolute;background:none;color:var(--ink);font-size:2rem;padding:1rem;letter-spacing:0}
+.lb .x{top:.4rem;right:.8rem}.lb .pv{left:.4rem;top:50%}.lb .nx{right:.4rem;top:50%}
+@media(max-width:760px){.cwrap{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.work{transition:none}html{scroll-behavior:auto}}
+
+.hero{grid-template-rows:none;grid-template-columns:1.1fr 1fr;gap:clamp(1.5rem,5vw,5rem);align-items:center}
+.hero figure{min-height:0;justify-self:center;width:100%;max-width:40rem;overflow:hidden;cursor:zoom-in}
+.hero figure img{width:100%;height:auto;max-height:80svh;object-fit:cover;display:block}
+.hero h1{margin-top:0}
+.work{display:block;text-decoration:none}
+.work img{transition:transform .8s}.work:hover img{transform:scale(1.02)}.work .im{overflow:hidden}
+.detail{display:none;padding-top:7rem;max-width:80rem;margin:auto}
+.back{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--mute)}
+.back:hover{color:var(--clay)}
+.dgrid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,6vw,5rem);margin-top:2.5rem;align-items:start}
+.info{position:sticky;top:6rem}
+.info h1{font:400 clamp(2.2rem,4.5vw,3.6rem)/1.05 var(--serif)}
+.info .m{margin:1rem 0 1.6rem;color:var(--clay);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.8}
+.info p{font:400 1.2rem/1.6 var(--serif)}
+.photos{display:grid;gap:1.2rem}
+.photos img{width:100%;display:block;cursor:zoom-in}
+.photos .ph{aspect-ratio:4/5;background:var(--bg2);display:grid;place-items:center;font:italic 1.2rem var(--serif);color:var(--mute)}
+.pn{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.pn a{text-decoration:none;font:400 1.2rem var(--serif)}.pn a:hover{color:var(--clay)}
+@media(max-width:760px){.hero,.dgrid{grid-template-columns:1fr}.info{position:static}.hero{padding-top:5.5rem}}
+.n,footer .fn{display:flex;align-items:center;gap:10px}.mark{width:30px;height:30px;flex:none}
+.hero p.sub{text-transform:none;letter-spacing:0;font-size:1.12rem;line-height:1.65;color:var(--ink);max-width:34rem;margin-top:1.4rem}
+header .n{font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;font-weight:600;font-size:1.35rem;letter-spacing:.02em;color:#221d17}
+footer .fn{font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;font-style:italic;font-weight:400;font-size:1.5rem}
+</style>
+</head>
+<body>
+<header><a class="n" href="#/"><svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 30 L20 6 L34 30 Z" stroke="#c0472a" stroke-width="2" fill="none"/><path d="M13 24 L27 24" stroke="#8b4226" stroke-width="2"/></svg>Adriano Segarelli</a><a href="#contatti" onclick="if(!location.hash.startsWith('#/opera'))return;event.preventDefault();location.hash='';setTimeout(()=>document.getElementById('contatti').scrollIntoView(),50)">Contatti</a></header>
+
+<main id="top">
+<div id="home">
+<div class="hero">
+  <div><h1>Il tempo della <em>forma</em>.</h1><p class="sub">Sculture in argilla: opere modellate a mano, uniche, pensate per chi cerca nella materia un gesto e una domanda.</p></div>
+  <figure id="heroimg"></figure>
+</div>
+<section class="about"><p>Lavoro l'argilla a mano, lasciando che la materia conservi il segno del gesto. Ogni opera nasce lenta, e porta con sé una domanda.</p></section>
+<section id="opere" style="padding-top:0"><div class="gallery" id="g"></div></section>
+</div>
+<section class="detail" id="detail"></section>
+<section class="contact" id="contatti">
+<div class="cwrap">
+  <div>
+    <h2>Parliamo della tua idea</h2>
+    <dl>
+      <div><dt>Bottega</dt><dd>Via Laura Mantegazza 20a, Roma</dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:adrianosegarelli.art@gmail.com">adrianosegarelli.art@gmail.com</a></dd></div>
+      <div><dt>Orari visite</dt><dd>Su prenotazione</dd></div>
+    </dl>
+  </div>
+  <form id="f">
+    <label>Nome e cognome<input name="nome" required></label>
+    <label>Email<input type="email" name="email" required></label>
+    <label>Tipo di richiesta
+      <select name="tipo"><option>Acquisto di un'opera</option><option>Opera su commissione</option><option>Mostre e collaborazioni</option><option>Altro</option></select></label>
+    <label>Messaggio<textarea name="msg" required></textarea></label>
+    <button type="submit">Invia richiesta</button>
+    <p id="ok">Grazie! Si apre il tuo programma di posta per completare l'invio.</p>
+  </form>
+</div>
+</section>
+</main>
+<footer>
+<div class="fg">
+  <div><div class="fn"><svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 30 L20 6 L34 30 Z" stroke="#c0472a" stroke-width="2" fill="none"/><path d="M13 24 L27 24" stroke="#8b4226" stroke-width="2"/></svg>Adriano Segarelli</div><p>Sculture in argilla: opere modellate a mano, uniche, pensate per chi cerca nella materia un gesto e una domanda.</p></div>
+  <div><h4>Sezioni</h4><ul><li><a href="#opere">Opere</a></li><li><a href="#contatti">Contatti</a></li></ul></div>
+  <div><h4>Bottega</h4><ul><li>Via Laura Mantegazza 20a, Roma</li><li><a href="mailto:adrianosegarelli.art@gmail.com">adrianosegarelli.art@gmail.com</a></li></ul></div>
+</div>
+<div class="fb"><span>© 2026 Adriano Segarelli</span><span>ideazione Nycheia</span></div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="x" aria-label="Chiudi">×</button><button class="pv" aria-label="Precedente">‹</button><button class="nx" aria-label="Successiva">›</button>
+  <div class="stage" id="st"></div><p id="cap"></p>
+</div>
+
+<script>
+const WORKS=[
+ {
+  "title": "Il peso dell’amore",
+  "tech": "Creta cruda dipinta",
+  "dim": "18 × 20 × 24,5 cm",
+  "desc": "C’è quel peso costante sulle spalle che tutti portiamo. È in quello che finisce. In ciò che si perde. In tutto quello che non sarà più lo stesso. È quel peso che piega in avanti il collo quando un pensiero diventa la paura di ricominciare. Di non sapere, di non trovare. Ma è quel peso necessario alla vita e al cuore. Quel peso che ti porta ancora a cercare.",
+  "imgs": [
+   "img/il-peso-dell-amore-8.webp",
+   "img/il-peso-dell-amore-1.webp",
+   "img/il-peso-dell-amore-2.webp",
+   "img/il-peso-dell-amore-3.webp",
+   "img/il-peso-dell-amore-4.webp",
+   "img/il-peso-dell-amore-5.webp",
+   "img/il-peso-dell-amore-6.webp",
+   "img/il-peso-dell-amore-7.webp"
+  ],
+  "cover": 1,
+  "id": 1
+ },
+ {
+  "title": "I dubbi di Venere",
+  "tech": "Creta cruda, stucco e pasta di cristallo",
+  "dim": "25 × 30 × 30 cm",
+  "desc": "Cos’è la reale bellezza? È nell’aspetto? È nella forma? E qual è per definizione la forma che è sinonimo di bellezza? Forse la vera bellezza non ha forma. Forse è la suggestione dell’amore a creare quell’assoluto compiacimento degli occhi. O forse la vera bellezza arriva da colui che è pronto a riceverla senza provare per essa nessun timore. Forse la vera bellezza non è realmente in ciò che rappresento ma in tutto ciò che l’universo mi ha donato e alla fortuna di poter guardarmi intorno e poter compiacere i miei occhi come ogni essere vivente e non per la mia dote divina, per la quale forse sono disposta alla rinuncia ma per non rinunciare ad ammirare semplicemente tutta la bellezza che c’è fuori.",
+  "imgs": [
+   "img/i-dubbi-di-venere-1.webp",
+   "img/i-dubbi-di-venere-2.webp",
+   "img/i-dubbi-di-venere-3.webp",
+   "img/i-dubbi-di-venere-4.webp"
+  ],
+  "cover": 0,
+  "id": 2
+ },
+ {
+  "title": "Il sostegno morale",
+  "tech": "Creta e stucco",
+  "dim": "21 × 20 × 20 cm",
+  "desc": "Nei veri momenti di difficoltà l’uomo ha bisogno di un vero appoggio. Un sostegno forte e invalicabile. A volte lo può trovare dentro di sé sotto forma di energia e risolutezza. A volte un appiglio può essere ovunque. Ciò che conta è che sia sincero.",
+  "imgs": [
+   "img/il-sostegno-morale-1.webp",
+   "img/il-sostegno-morale-2.webp",
+   "img/il-sostegno-morale-3.webp",
+   "img/il-sostegno-morale-4.webp"
+  ],
+  "cover": 0,
+  "id": 3
+ }
+];
+const $=s=>document.querySelector(s),g=$("#g"),lb=$("#lb");
+const slug=w=>w.id;
+const ph=(r)=>`<div class="ph" style="aspect-ratio:${r||"4/5"}">foto in arrivo</div>`;
+// Home: gallery (cover = prima foto di ogni opera; cambia "cover" per sceglierne un'altra)
+WORKS.forEach(w=>{const a=document.createElement("a");a.className="work";a.href="#/opera/"+w.id;
+ a.innerHTML=`<div class="im">${w.imgs.length?`<img src="${w.imgs[w.cover]}" alt="${w.title}" loading="lazy">`:ph("4/5")}</div><h3>${w.title}</h3><span>${w.tech}</span>`;g.append(a)});
+const withImg=WORKS.find(w=>w.imgs.length);
+if(withImg){$("#heroimg").innerHTML=`<img src="${withImg.imgs[0]}" alt="${withImg.title}">`;$("#heroimg").onclick=()=>{location.hash="#/opera/"+withImg.id}}
+// Pagina opera
+function renderDetail(id){const i=WORKS.findIndex(w=>w.id==id);if(i<0)return false;const w=WORKS[i],p=WORKS[(i+WORKS.length-1)%WORKS.length],n=WORKS[(i+1)%WORKS.length];
+ $("#detail").innerHTML=`<a class="back" href="#opere">← Tutte le opere</a>
+ <div class="dgrid"><div class="info"><h1>${w.title}</h1><div class="m">${w.tech}<br>${w.dim}</div><p>${w.desc}</p></div>
+ <div class="photos">${w.imgs.length?w.imgs.map((s,k)=>`<img src="${s}" alt="${w.title} — foto ${k+1}" data-k="${k}">`).join(""):ph()}</div></div>
+ <div class="pn"><a href="#/opera/${p.id}">← ${p.title}</a><a href="#/opera/${n.id}">${n.title} →</a></div>`;
+ document.querySelectorAll(".photos img").forEach(im=>im.onclick=()=>openLb(w,+im.dataset.k));return true}
+function route(){const m=location.hash.match(/^#\/opera\/(\d+)/);const d=$("#detail"),h=$("#home");
+ if(m&&renderDetail(m[1])){h.style.display="none";d.style.display="block";window.scrollTo(0,0)}
+ else{d.style.display="none";h.style.display="block";if(location.hash&&!m){try{const t=document.querySelector(location.hash);t&&t.scrollIntoView()}catch(_){window.scrollTo(0,0)}}}}
+addEventListener("hashchange",route);route();
+// Lightbox
+let cw,ck=0;
+function showLb(k){ck=(k+cw.imgs.length)%cw.imgs.length;$("#st").innerHTML=`<img src="${cw.imgs[ck]}" alt="${cw.title}">`;$("#cap").innerHTML=`<b>${cw.title}</b>${cw.tech} · ${cw.dim}`}
+function openLb(w,k){cw=w;showLb(k);lb.classList.add("on");document.body.style.overflow="hidden"}
+function closeLb(){lb.classList.remove("on");document.body.style.overflow=""}
+$(".x").onclick=closeLb;$(".pv").onclick=()=>showLb(ck-1);$(".nx").onclick=()=>showLb(ck+1);
+lb.onclick=e=>{if(e.target===lb||e.target.id==="st")closeLb()};
+addEventListener("keydown",e=>{if(!lb.classList.contains("on"))return;if(e.key==="Escape")closeLb();if(e.key==="ArrowLeft")showLb(ck-1);if(e.key==="ArrowRight")showLb(ck+1)});
+// Animazione ingresso
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll(".work").forEach(el=>io.observe(el));
+// Modulo contatti
+$("#f").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);
+ const body=`${f.get("msg")}\n\n— ${f.get("nome")} (${f.get("email")})`;
+ location.href=`mailto:adrianosegarelli.art@gmail.com?subject=${encodeURIComponent(f.get("tipo"))}&body=${encodeURIComponent(body)}`;$("#ok").style.display="block"};
+</script>
+</body>
+</html>
