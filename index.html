@@ -14,10 +14,10 @@
 :root{--bg:#f5efe6;--bg2:#ebe2d3;--ink:#3a2f27;--mute:#7d6e60;--clay:#b5714d;--line:#d8cbb8;
 --serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Helvetica Neue",Arial,sans-serif}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
 body{background:var(--bg);color:var(--ink);font:300 1.05rem/1.7 var(--sans)}
 a{color:inherit}
-header{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:1.2rem clamp(1.2rem,4vw,3rem);z-index:5;background:linear-gradient(var(--bg),transparent);}
+header{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:1.2rem clamp(1.2rem,4vw,3rem);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);}
 header a{text-decoration:none;font:400 .78rem var(--sans);letter-spacing:.2em;text-transform:uppercase}
 header .n{font:400 1.4rem var(--serif);letter-spacing:.02em;text-transform:none}
 .hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:6rem clamp(1.2rem,4vw,3rem) 3rem}
@@ -79,17 +79,17 @@ footer a{text-decoration:none;color:inherit}footer a:hover{color:var(--clay)}
 .detail{display:none;padding-top:7rem;max-width:80rem;margin:auto}
 .back{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--mute)}
 .back:hover{color:var(--clay)}
-.dgrid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,6vw,5rem);margin-top:2.5rem;align-items:start}
-.info{position:sticky;top:6rem}
+.dgrid{display:block;margin-top:2.5rem}
+.info{max-width:46rem;margin-bottom:3.5rem}
 .info h1{font:400 clamp(2.2rem,4.5vw,3.6rem)/1.05 var(--serif)}
 .info .m{margin:1rem 0 1.6rem;color:var(--clay);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.8}
 .info p{font:400 1.2rem/1.6 var(--serif)}
-.photos{display:grid;gap:1.2rem}
-.photos img{width:100%;display:block;cursor:zoom-in}
+.photos{columns:2 380px;column-gap:1.2rem}
+.photos img{width:100%;display:block;cursor:zoom-in;margin-bottom:1.2rem;break-inside:avoid}
 .photos .ph{aspect-ratio:4/5;background:var(--bg2);display:grid;place-items:center;font:italic 1.2rem var(--serif);color:var(--mute)}
 .pn{display:flex;justify-content:space-between;gap:1rem;margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line)}
 .pn a{text-decoration:none;font:400 1.2rem var(--serif)}.pn a:hover{color:var(--clay)}
-@media(max-width:760px){.hero,.dgrid{grid-template-columns:1fr}.info{position:static}.hero{padding-top:5.5rem}}
+@media(max-width:760px){.hero,.dgrid{grid-template-columns:1fr}.photos{columns:1}.hero{padding-top:5.5rem}}
 .n,footer .fn{display:flex;align-items:center;gap:10px}.mark{width:30px;height:30px;flex:none}
 .hero p.sub{text-transform:none;letter-spacing:0;font-size:1.12rem;line-height:1.65;color:var(--ink);max-width:34rem;margin-top:1.4rem}
 header .n{font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;font-weight:600;font-size:1.35rem;letter-spacing:.02em;color:#221d17}
@@ -102,7 +102,7 @@ footer .fn{font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif
 <main id="top">
 <div id="home">
 <div class="hero">
-  <div><h1>Il tempo della <em>forma</em>.</h1><p class="sub">Sculture in argilla: opere modellate a mano, uniche, pensate per chi cerca nella materia un gesto, una domanda.</p></div>
+  <div><h1>Il tempo della <em>forma</em>.</h1><p class="sub">Sculture in argilla: opere modellate a mano, uniche, pensate per chi cerca nella materia un gesto e una domanda.</p></div>
   <figure id="heroimg"></figure>
 </div>
 <section class="about"><p>Lavoro l'argilla a mano, lasciando che la materia conservi il segno del gesto. Ogni opera nasce lenta, e porta con sé una domanda.</p></section>
@@ -146,29 +146,13 @@ footer .fn{font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif
 </div>
 
 <script>
-const WORKS=[
+const ALL=[
  {
-  "title": "Il peso dell’amore",
-  "tech": "Creta cruda dipinta",
-  "dim": "18 × 20 × 24,5 cm",
-  "desc": "C’è quel peso costante sulle spalle che tutti portiamo. È in quello che finisce. In ciò che si perde. In tutto quello che non sarà più lo stesso. È quel peso che piega in avanti il collo quando un pensiero diventa la paura di ricominciare. Di non sapere, di non trovare. Ma è quel peso necessario alla vita e al cuore. Quel peso che ti porta ancora a cercare.",
-  "imgs": [
-   "img/il-peso-dell-amore-8.webp",
-   "img/il-peso-dell-amore-1.webp",
-   "img/il-peso-dell-amore-2.webp",
-   "img/il-peso-dell-amore-3.webp",
-   "img/il-peso-dell-amore-4.webp",
-   "img/il-peso-dell-amore-5.webp",
-   "img/il-peso-dell-amore-6.webp",
-   "img/il-peso-dell-amore-7.webp"
-  ],
-  "cover": 1,
-  "id": 1
- },
- {
+  "id": 1,
   "title": "I dubbi di Venere",
   "tech": "Creta cruda, stucco e pasta di cristallo",
   "dim": "25 × 30 × 30 cm",
+  "year": "",
   "desc": "Cos’è la reale bellezza? È nell’aspetto? È nella forma? E qual è per definizione la forma che è sinonimo di bellezza? Forse la vera bellezza non ha forma. Forse è la suggestione dell’amore a creare quell’assoluto compiacimento degli occhi. O forse la vera bellezza arriva da colui che è pronto a riceverla senza provare per essa nessun timore. Forse la vera bellezza non è realmente in ciò che rappresento ma in tutto ciò che l’universo mi ha donato e alla fortuna di poter guardarmi intorno e poter compiacere i miei occhi come ogni essere vivente e non per la mia dote divina, per la quale forse sono disposta alla rinuncia ma per non rinunciare ad ammirare semplicemente tutta la bellezza che c’è fuori.",
   "imgs": [
    "img/i-dubbi-di-venere-1.webp",
@@ -176,13 +160,14 @@ const WORKS=[
    "img/i-dubbi-di-venere-3.webp",
    "img/i-dubbi-di-venere-4.webp"
   ],
-  "cover": 0,
-  "id": 2
+  "cover": 0
  },
  {
+  "id": 2,
   "title": "Il sostegno morale",
   "tech": "Creta e stucco",
   "dim": "21 × 20 × 20 cm",
+  "year": "",
   "desc": "Nei veri momenti di difficoltà l’uomo ha bisogno di un vero appoggio. Un sostegno forte e invalicabile. A volte lo può trovare dentro di sé sotto forma di energia e risolutezza. A volte un appiglio può essere ovunque. Ciò che conta è che sia sincero.",
   "imgs": [
    "img/il-sostegno-morale-1.webp",
@@ -190,22 +175,144 @@ const WORKS=[
    "img/il-sostegno-morale-3.webp",
    "img/il-sostegno-morale-4.webp"
   ],
+  "cover": 0
+ },
+ {
+  "id": 3,
+  "title": "Gli appigli del cuore",
+  "tech": "Scultura in creta",
+  "dim": "21,5 × 20 × 20 cm",
+  "year": "2020",
+  "desc": "Si aggrappa anima e corpo.\nCon tutta la forza che l'amore le ha concesso.\nÈ il sostegno delle mani, del respiro.. del puro supporto emotivo\nE nello stesso tempo è un peso.\nMa se starà per cadere troverà un appiglio.\nE se cadranno lo faranno insieme.\nIl 2020 è stato sicuramente un anno atipico, forse surreale.\nUn anno che entrerà nella storia. Sarà ricordato nel tempo e mai si cancellerà dalla memoria di chi l'ha vissuto.\nQuesta pandemia a distanza di esattamente 100 anni dall'ultima ha fratturato il mondo, investendolo e schiacciandolo a livello sanitario, economico e psicologico.\nLa sofferenza, la paura e L'incertezza hanno regnato sovrane nella mente di ognuno di noi.\nIo ringrazio l'ARTE.\nLa mia salvezza, la mia risorsa, la mia forza interiore.\nColei che mi ha aiutato a canalizzare le mie paure e le mie incertezze in qualcosa che rimarrà per sempre la testimonianza di quello che ho vissuto.\nLe sarò sempre riconoscente e mai la tradirò, perché ha svelato la mia riconoscibilità sia come uomo che come artista e mi ha dato modo di scavare nelle emozioni attraverso il linguaggio del corpo, delle espressioni e del cuore, scovando quello che io ho definito \"destrutturalismo interiore\".. tutto ciò che va al di là della figura, cercando continuamente e instancabilmente la parte più intima dell'essere umano: la forza, le debolezze, le fragilità, i difetti, le risorse, i sentimenti, le emozioni, le assonanze con l'universo.\nIl mio percorso e la mia ricerca sono ancora lunghi e l'arte mi sussurra sempre di non fermarmi.\nAuguro a tutti un felice anno nuovo e di meritata serenità.\nE auguro a tutti gli artisti di ascoltare sempre la voce delle proprie emozioni e trasformarle in creatività, per essere tutti testimoni del nostro tempo.",
+  "imgs": [],
+  "cover": 0
+ },
+ {
+  "id": 4,
+  "title": "Il patto degli opposti",
+  "tech": "Creta cruda dipinta",
+  "dim": "24,5 × 20 × 20 cm",
+  "year": "2021",
+  "desc": "Gli esseri non sempre sanno dove i loro cuori possono combaciare..\nA volte camminano sulla stessa strada, pur prendendo direzioni diverse.\nLa mente non corrisponde al cuore.\nMa alcuni sono indissolubilmente legati dalla stessa emozione, pur essendo totalmente incompatibili.\nQuello è il loro vero compromesso.\nÈ ciò che gli unisce anche quando la vita tenta di dividerli.",
+  "imgs": [],
+  "cover": 0
+ },
+ {
+  "id": 5,
+  "title": "La vetta della penitenza",
+  "tech": "Creta cruda dipinta",
+  "dim": "15 × 30 × 30 cm",
+  "year": "2021",
+  "desc": "Con grande fatica affonda le sue braccia tra le roccie ruvide e taglienti dei suoi sbagli.\nPenitente e stremato, cerca la motivazione che possa giustificare se stesso.\nConosce i suoi limiti, ma sa che deve oltrepassarli.\nÈ un animo estremo, è un cuore lacerato.\nSeveramente punisce ancora se stesso.\nE continua a sbagliare.\nMa continua ad amare.",
+  "imgs": [
+   "img/la-vetta-della-penitenza-1.webp",
+   "img/la-vetta-della-penitenza-2.webp",
+   "img/la-vetta-della-penitenza-3.webp",
+   "img/la-vetta-della-penitenza-4.webp",
+   "img/la-vetta-della-penitenza-5.webp",
+   "img/la-vetta-della-penitenza-6.webp",
+   "img/la-vetta-della-penitenza-7.webp",
+   "img/la-vetta-della-penitenza-8.webp"
+  ],
+  "cover": 0
+ },
+ {
+  "id": 6,
+  "title": "L'origine di un abbraccio",
+  "tech": "Creta cruda dipinta",
+  "dim": "31,5 × 30 × 30 cm",
+  "year": "2021",
+  "desc": "Un abbraccio non è solo l'intreccio di due corpi che si avvolgono.\nÈ un impeto.\nÈ una necessità che nasce da dentro.\nÈ la forza irrefrenabile del calore umano.\nUn abbraccio non è solo avvicinarsi.\nÈ ripararsi.\nÈ proteggersi dal freddo della lontananza.\nÈ guardarsi prima di stringersi.\nE sapere in un attimo di aver bisogno solo di quello.\nE tutto combacia in un unico istante.",
+  "imgs": [
+   "img/l-origine-di-un-abbraccio-1.webp",
+   "img/l-origine-di-un-abbraccio-2.webp",
+   "img/l-origine-di-un-abbraccio-3.webp",
+   "img/l-origine-di-un-abbraccio-4.webp",
+   "img/l-origine-di-un-abbraccio-5.webp",
+   "img/l-origine-di-un-abbraccio-6.webp",
+   "img/l-origine-di-un-abbraccio-7.webp",
+   "img/l-origine-di-un-abbraccio-8.webp",
+   "img/l-origine-di-un-abbraccio-9.webp",
+   "img/l-origine-di-un-abbraccio-10.webp"
+  ],
+  "cover": 0
+ },
+ {
+  "id": 7,
+  "title": "Pensieri sparsi",
+  "tech": "Creta cruda e stucco",
+  "dim": "21 × 30 × 30 cm",
+  "year": "2021",
+  "desc": "Raccolto in una veste fatta di intimi pensieri,\nsi rivolge verso uno spazio che sa di vuoto e di distanza.\nMa percepisce quel perimetro come l'esatta proiezione dei suoi contenuti profondi.\nE all'improvviso quell'infinito viene colmato dalla sua mente.\nE tutto ciò che custodisce si espande in tanti piccoli frammenti,\nche tintinnano fra loro come vetri esplos. inglobando la sua energia nel tutto.",
+  "imgs": [
+   "img/pensieri-sparsi-1.webp",
+   "img/pensieri-sparsi-2.webp",
+   "img/pensieri-sparsi-3.webp",
+   "img/pensieri-sparsi-4.webp",
+   "img/pensieri-sparsi-5.webp",
+   "img/pensieri-sparsi-6.webp",
+   "img/pensieri-sparsi-7.webp",
+   "img/pensieri-sparsi-8.webp",
+   "img/pensieri-sparsi-9.webp"
+  ],
+  "cover": 0
+ },
+ {
+  "id": 8,
+  "title": "Gli estremi del tempo",
+  "tech": "Creta cruda e stucco",
+  "dim": "26,5 × 30 × 30 cm",
+  "year": "2021",
+  "desc": "Il tempo nella mente dell'uomo persiste come un peso costante.\nEgli lo avverte come una linea continua che inizia e finisce.\nNel mezzo, scorrendo su quella linea, l'uomo freme minuto per minuto che il tempo possa scorrere in fretta.\nMa allo stesso modo si aggrappa ad esso, guardandosi in dietro, rimpiangendo quel tempo che è già passato e che non tornerà più indietro.",
+  "imgs": [
+   "img/gli-estremi-del-tempo-1.webp",
+   "img/gli-estremi-del-tempo-2.webp",
+   "img/gli-estremi-del-tempo-3.webp",
+   "img/gli-estremi-del-tempo-4.webp",
+   "img/gli-estremi-del-tempo-5.webp",
+   "img/gli-estremi-del-tempo-6.webp",
+   "img/gli-estremi-del-tempo-7.webp",
+   "img/gli-estremi-del-tempo-8.webp",
+   "img/gli-estremi-del-tempo-9.webp"
+  ],
+  "cover": 0
+ },
+ {
+  "id": 9,
+  "title": "Il peso dell'amore",
+  "tech": "Creta cruda dipinta",
+  "dim": "18 × 20 × 24,5 cm",
+  "year": "2021",
+  "desc": "C’è quel peso costante sulle spalle che tutti portiamo. È in quello che finisce. In ciò che si perde. In tutto quello che non sarà più lo stesso. È quel peso che piega in avanti il collo quando un pensiero diventa la paura di ricominciare. Di non sapere, di non trovare. Ma è quel peso necessario alla vita e al cuore. Quel peso che ti porta ancora a cercare.",
+  "imgs": [
+   "img/il-peso-dell-amore-1.webp",
+   "img/il-peso-dell-amore-2.webp",
+   "img/il-peso-dell-amore-3.webp",
+   "img/il-peso-dell-amore-4.webp",
+   "img/il-peso-dell-amore-5.webp",
+   "img/il-peso-dell-amore-6.webp",
+   "img/il-peso-dell-amore-7.webp",
+   "img/il-peso-dell-amore-8.webp",
+   "img/il-peso-dell-amore-9.webp",
+   "img/il-peso-dell-amore-10.webp"
+  ],
   "cover": 0,
-  "id": 3
+  "hero": true
  }
 ];
+const WORKS=ALL.filter(w=>w.imgs.length); // le opere senza foto restano nascoste finché non aggiungi le immagini
 const $=s=>document.querySelector(s),g=$("#g"),lb=$("#lb");
 const slug=w=>w.id;
 const ph=(r)=>`<div class="ph" style="aspect-ratio:${r||"4/5"}">foto in arrivo</div>`;
 // Home: gallery (cover = prima foto di ogni opera; cambia "cover" per sceglierne un'altra)
 WORKS.forEach(w=>{const a=document.createElement("a");a.className="work";a.href="#/opera/"+w.id;
- a.innerHTML=`<div class="im">${w.imgs.length?`<img src="${w.imgs[w.cover]}" alt="${w.title}" loading="lazy">`:ph("4/5")}</div><h3>${w.title}</h3><span>${w.tech}</span>`;g.append(a)});
-const withImg=WORKS.find(w=>w.imgs.length);
+ a.innerHTML=`<div class="im">${w.imgs.length?`<img src="${w.imgs[w.cover]}" alt="${w.title}" loading="lazy">`:ph("4/5")}</div><h3>${w.title}</h3><span>${w.tech}${w.year?" · "+w.year:""}</span>`;g.append(a)});
+const withImg=WORKS.find(w=>w.hero)||WORKS[0];
 if(withImg){$("#heroimg").innerHTML=`<img src="${withImg.imgs[0]}" alt="${withImg.title}">`;$("#heroimg").onclick=()=>{location.hash="#/opera/"+withImg.id}}
 // Pagina opera
 function renderDetail(id){const i=WORKS.findIndex(w=>w.id==id);if(i<0)return false;const w=WORKS[i],p=WORKS[(i+WORKS.length-1)%WORKS.length],n=WORKS[(i+1)%WORKS.length];
  $("#detail").innerHTML=`<a class="back" href="#opere">← Tutte le opere</a>
- <div class="dgrid"><div class="info"><h1>${w.title}</h1><div class="m">${w.tech}<br>${w.dim}</div><p>${w.desc}</p></div>
+ <div class="dgrid"><div class="info"><h1>${w.title}</h1><div class="m">${w.tech}<br>${w.dim}${w.year?"<br>"+w.year:""}</div><p>${w.desc.replace(/\n+/g,"<br>")}</p></div>
  <div class="photos">${w.imgs.length?w.imgs.map((s,k)=>`<img src="${s}" alt="${w.title} — foto ${k+1}" data-k="${k}">`).join(""):ph()}</div></div>
  <div class="pn"><a href="#/opera/${p.id}">← ${p.title}</a><a href="#/opera/${n.id}">${n.title} →</a></div>`;
  document.querySelectorAll(".photos img").forEach(im=>im.onclick=()=>openLb(w,+im.dataset.k));return true}
@@ -215,7 +322,7 @@ function route(){const m=location.hash.match(/^#\/opera\/(\d+)/);const d=$("#det
 addEventListener("hashchange",route);route();
 // Lightbox
 let cw,ck=0;
-function showLb(k){ck=(k+cw.imgs.length)%cw.imgs.length;$("#st").innerHTML=`<img src="${cw.imgs[ck]}" alt="${cw.title}">`;$("#cap").innerHTML=`<b>${cw.title}</b>${cw.tech} · ${cw.dim}`}
+function showLb(k){ck=(k+cw.imgs.length)%cw.imgs.length;$("#st").innerHTML=`<img src="${cw.imgs[ck]}" alt="${cw.title}">`;$("#cap").innerHTML=`<b>${cw.title}</b>${cw.tech} · ${cw.dim}${cw.year?" · "+cw.year:""}`}
 function openLb(w,k){cw=w;showLb(k);lb.classList.add("on");document.body.style.overflow="hidden"}
 function closeLb(){lb.classList.remove("on");document.body.style.overflow=""}
 $(".x").onclick=closeLb;$(".pv").onclick=()=>showLb(ck-1);$(".nx").onclick=()=>showLb(ck+1);

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opera — Adriano Segarelli</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏺</text></svg>" />
+  <style>
+    :root {
+      --bg: #f5f1ea; --bg-alt: #ebe4d8; --ink: #2b2620;
+      --ink-soft: #6b6158; --accent: #8b6f4e; --line: #d9d0c1;
+      --serif: Georgia, 'Times New Roman', 'Palatino Linotype', serif;
+      --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.6; font-weight: 300; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    header { position: fixed; top: 0; left: 0; right: 0; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: rgba(245,241,234,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .logo { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); text-decoration: none; font-style: italic; }
+    .back-link { color: var(--ink-soft); text-decoration: none; font-size: .85rem; letter-spacing: 1px; transition: color .3s; }
+    .back-link:hover { color: var(--ink); }
+
+    .opera-detail { padding: 8rem 0 4rem; }
+
+    /* Didascalia in testa */
+    .opera-info { max-width: 46rem; margin-bottom: 4rem; }
+    .opera-info h1 { font-family: var(--serif); font-size: clamp(2rem,4vw,3rem); font-weight: normal; font-style: italic; line-height: 1.2; margin-bottom: 1.5rem; }
+    .opera-meta-info { padding: 1.5rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+    .meta-row { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .8rem; font-size: .9rem; }
+    .meta-row:last-child { margin-bottom: 0; }
+    .meta-label { color: var(--ink-soft); letter-spacing: 1px; text-transform: uppercase; font-size: .75rem; }
+    .meta-value { color: var(--ink); text-align: right; }
+    .descrizione { font-size: 1.05rem; line-height: 1.8; white-space: pre-line; }
+
+    /* Tutte le foto sotto */
+    .foto { columns: 2 380px; column-gap: 1.4rem; }
+    .foto img { width: 100%; height: auto; display: block; margin-bottom: 1.4rem; break-inside: avoid; background: var(--bg-alt); border-radius: 2px; cursor: zoom-in; }
+    .foto .placeholder { aspect-ratio: 4/5; background: var(--bg-alt); display: grid; place-items: center; font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--ink-soft); }
+
+    .navigazione-opere { margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; }
+    .nav-opera { display: flex; align-items: center; gap: .8rem; color: var(--ink-soft); text-decoration: none; font-size: .85rem; letter-spacing: 1px; transition: color .3s; }
+    .nav-opera:hover { color: var(--ink); }
+    .nav-opera.disabled { opacity: .3; pointer-events: none; }
+    .nav-arrow { font-size: 1.2rem; }
+
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.95); z-index: 1000; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90%; max-height: 90vh; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; font-size: 3rem; cursor: pointer; padding: 1rem; }
+    .lightbox-prev { left: 2rem; }
+    .lightbox-next { right: 2rem; }
+    .lightbox-counter { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.6); font-size: .85rem; letter-spacing: 2px; }
+
+    @media (max-width: 768px) {
+      header { padding: 1.2rem 1.5rem; }
+      .container { padding: 0 1.5rem; }
+      .opera-detail { padding: 6rem 0 3rem; }
+      .opera-info { margin-bottom: 3rem; }
+      .foto { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Adriano Segarelli</a>
+    <a href="index.html#opere" class="back-link">← Torna alle opere</a>
+  </header>
+
+  <main class="opera-detail">
+    <div class="container">
+      <div class="opera-info">
+        <h1 id="titolo"></h1>
+        <div class="opera-meta-info">
+          <div class="meta-row"><span class="meta-label">Tecnica e dimensioni</span><span class="meta-value" id="tecnica"></span></div>
+          <div class="meta-row" id="anno-row" style="display:none"><span class="meta-label">Anno</span><span class="meta-value" id="anno"></span></div>
+        </div>
+        <div class="descrizione" id="descrizione"></div>
+      </div>
+
+      <div class="foto" id="foto"></div>
+
+      <div class="navigazione-opere">
+        <a href="#" class="nav-opera" id="nav-prev"><span class="nav-arrow">←</span><span>Precedente</span></a>
+        <a href="#" class="nav-opera" id="nav-next"><span>Successiva</span><span class="nav-arrow">→</span></a>
+      </div>
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lb-close">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lb-prev">‹</button>
+    <img src="" alt="" id="lb-img" />
+    <button class="lightbox-nav lightbox-next" id="lb-next">›</button>
+    <div class="lightbox-counter" id="lb-counter"></div>
+  </div>
+
+  <script>
+    let opere = [], idx = 0, imgs = [], imgIdx = 0;
+
+    async function init() {
+      const res = await fetch('opere.json');
+      opere = (await res.json()).opere;
+      const titolo = new URLSearchParams(location.search).get('opera');
+      idx = opere.findIndex(o => o.titolo === titolo);
+      if (idx === -1) { location.href = 'index.html'; return; }
+
+      const opera = opere[idx];
+      imgs = opera.immagini.map(f => `img/opere/${f}`);
+
+      document.title = `${opera.titolo} — Adriano Segarelli`;
+      document.getElementById('titolo').textContent = opera.titolo;
+      document.getElementById('tecnica').textContent = opera.specifiche;
+      if (opera.anno) {
+        document.getElementById('anno-row').style.display = 'flex';
+        document.getElementById('anno').textContent = opera.anno;
+      }
+      document.getElementById('descrizione').textContent = opera.descrizione;
+
+      creaFoto();
+      aggiornaNav();
+    }
+
+    function creaFoto() {
+      const c = document.getElementById('foto');
+      c.innerHTML = '';
+      if (!imgs.length) {
+        c.innerHTML = '<div class="placeholder">foto in arrivo</div>';
+        return;
+      }
+      imgs.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${opere[idx].titolo} - immagine ${i+1}`;
+        img.loading = 'lazy';
+        img.onclick = () => apriLB(i);
+        c.appendChild(img);
+      });
+    }
+
+    function aggiornaNav() {
+      const p = document.getElementById('nav-prev'), n = document.getElementById('nav-next');
+      if (idx > 0) {
+        p.href = `opera.html?opera=${encodeURIComponent(opere[idx-1].titolo)}`;
+        p.classList.remove('disabled');
+      } else p.classList.add('disabled');
+      if (idx < opere.length-1) {
+        n.href = `opera.html?opera=${encodeURIComponent(opere[idx+1].titolo)}`;
+        n.classList.remove('disabled');
+      } else n.classList.add('disabled');
+    }
+
+    function apriLB(i) {
+      imgIdx = i;
+      document.getElementById('lb-img').src = imgs[i];
+      document.getElementById('lb-counter').textContent = `${i+1} / ${imgs.length}`;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function chiudiLB() { document.getElementById('lightbox').classList.remove('active'); }
+    function navLB(dir) {
+      imgIdx = (imgIdx + dir + imgs.length) % imgs.length;
+      document.getElementById('lb-img').src = imgs[imgIdx];
+      document.getElementById('lb-counter').textContent = `${imgIdx+1} / ${imgs.length}`;
+    }
+
+    document.getElementById('lb-close').onclick = chiudiLB;
+    document.getElementById('lb-prev').onclick = () => navLB(-1);
+    document.getElementById('lb-next').onclick = () => navLB(1);
+    document.getElementById('lightbox').onclick = e => { if (e.target.id === 'lightbox') chiudiLB(); };
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') chiudiLB();
+      if (e.key === 'ArrowLeft') navLB(-1);
+      if (e.key === 'ArrowRight') navLB(1);
+    });
+
+    init();
+  </script>
+</body>
+</html>
